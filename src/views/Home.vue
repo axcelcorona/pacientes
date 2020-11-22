@@ -1,6 +1,6 @@
 <template>
   <div class="container my-3">
-    <form>
+    <form @submit.prevent="porcesarFormulario">
       <Formulario msg="Datos del paciente" :paciente="paciente"/>
     </form>
   </div>
@@ -9,6 +9,9 @@
 <script>
 // @ is an alias to /src
 import Formulario from '../components/Formulairo'
+import {mapActions} from 'vuex'
+const shortid = require('shortid')
+
 export default {
   name: 'Home',
   components: {
@@ -31,5 +34,31 @@ export default {
       }
     }
   },
+  methods:{
+    ...mapActions(['setPacientes']),
+    porcesarFormulario(){
+      // generando el id 
+      this.paciente.id = shortid.generate()
+      console.log(this.paciente.id)
+
+      // enviadno los datos al arry
+      this.setPacientes(this.paciente)
+      
+      // Limpiando el formulario
+      this.paciente = {
+        nombre:'',
+        edad: '',
+        id:'',
+        numeroPaciente:'',
+        email:'',
+        fechaNacimiento:'',
+        dirreccionPaciente:'',
+        fechaMuestra:'',
+        celular:'',
+        cedula:'',
+        sintomas:[]
+      }
+    }
+  }
 }
 </script>
