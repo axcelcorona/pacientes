@@ -43,7 +43,7 @@ export default {
 
       // enviadno los datos al arry
       this.setPacientes(this.paciente)
-      
+
       // Limpiando el formulario
       this.paciente = {
         nombre:'',
@@ -52,7 +52,8 @@ export default {
         numeroPaciente:'',
         email:'',
         fechaNacimiento:'',
-        dirreccionPaciente:'',
+        direccionPaciente:'',
+        direccionMuesta:'',
         fechaMuestra:'',
         celular:'',
         cedula:'',

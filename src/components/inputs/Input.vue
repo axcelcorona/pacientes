@@ -71,7 +71,7 @@
           class="form-control"
           id="dirreccionPaciente"
           placeholder="Dirreccion Residencial..."
-          v-model="paciente.dirreccionPaciente"
+          v-model="paciente.direccionPaciente"
         />
       </div>
     </div>
@@ -108,7 +108,7 @@
           class="form-control"
           id="dirreicionMuestra"
           placeholder="Dirreccion de la Muestra..."
-          v-model="paciente.dirreicionMuestra"
+          v-model="paciente.direicionMuestra"
         />
       </div>
     </div>

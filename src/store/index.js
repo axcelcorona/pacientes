@@ -21,11 +21,17 @@ export default createStore({
     addPacietne(state, payload){
       state.pacientes.push(payload)
       console.log(state.pacientes)
+    },
+    deletePaciente(state, payload){
+      state.pacientes = state.pacientes.filter(item => item.id !== payload)
     }
   },
   actions: {
     setPacientes({commit}, paciente){
       commit('addPacietne', paciente)
+    },
+    setDeletePacietne({commit}, id){
+      commit('deletePaciente', id)
     }
   },
   modules: {
