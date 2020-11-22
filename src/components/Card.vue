@@ -39,21 +39,32 @@
       </div>
     </div>
     <div class="card-footer">
-        <button class="btn btn-danger" @click="setDeletePacietne(paciente.id)">Eliminar</button>
-        <router-link class="btn btn-warning mx-2" to="/">Editar</router-link>
+      <button class="btn btn-danger" @click="setDeletePacietne(paciente.id)">
+        Eliminar
+      </button>
+      <router-link
+        class="btn btn-warning mx-2"
+        :to="{
+          name: 'Editar',
+          params: {
+            id: paciente.id,
+          },
+        }"
+        >Editar</router-link
+      >
     </div>
   </div>
 </template>
 
 <script>
-import { mapActions } from 'vuex';
+import { mapActions } from "vuex";
 export default {
   props: {
     paciente: Object,
   },
-  methods:{
-      ...mapActions(['setDeletePacietne'])
-  }
+  methods: {
+    ...mapActions(["setDeletePacietne"]),
+  },
 };
 </script>
 

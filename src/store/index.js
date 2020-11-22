@@ -1,37 +1,59 @@
 import { createStore } from 'vuex'
+import router from '../router'
 
 export default createStore({
   state: {
-    pacientes:[],
+    pacientes: [],
     paciente: {
-      nombre:'',
+      nombre: '',
       edad: '',
-      id:'',
-      numeroPaciente:'',
-      email:'',
-      fechaNacimiento:'',
-      dirreccionPaciente:'',
-      fechaMuestra:'',
-      celular:'',
-      cedula:'',
-      sintomas:[]
+      id: '',
+      numeroPaciente: '',
+      email: '',
+      fechaNacimiento: '',
+      dirreccionPaciente: '',
+      fechaMuestra: '',
+      celular: '',
+      cedula: '',
+      sintomas: []
     }
   },
   mutations: {
-    addPacietne(state, payload){
+    addPacietne(state, payload) {
       state.pacientes.push(payload)
       console.log(state.pacientes)
     },
-    deletePaciente(state, payload){
+    deletePaciente(state, payload) {
       state.pacientes = state.pacientes.filter(item => item.id !== payload)
+    },
+    editarPaciente(state, payload) {
+      if(!state.pacientes.find(item => item.id === payload ? payload : item)){
+        router.push('/')
+        return
+      }
+      state.paciente = state.pacientes.find(item => item.id === payload )
+    },
+    updatePaciente(state, payload) {
+      state.pacientes = state.pacientes.map(item => item.is === payload ? payload : item)
+      console.log('paciente editado')
+      router.push('/')
     }
   },
   actions: {
-    setPacientes({commit}, paciente){
+    setPacientes({ commit }, paciente) {
       commit('addPacietne', paciente)
     },
-    setDeletePacietne({commit}, id){
+
+    setDeletePacietne({ commit }, id) {
       commit('deletePaciente', id)
+    },
+
+    setEditarPaciente({ commit }, id) {
+      commit('editarPaciente', id)
+    },
+
+    setUpdatePaciente({commit}, paciente){
+      commit('updatePaciente', paciente)
     }
   },
   modules: {
