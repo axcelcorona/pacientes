@@ -1,6 +1,6 @@
 <template>
   <div class="container my-3">
-    <form @click.prevent="setUpdatePaciente(pacieten)">
+    <form @submit.prevent="setUpdatePaciente(pacieten)">
       <Formulairo msg="Datos del Paciente a Editar" :paciente="paciente"/>
     </form>
   </div>
