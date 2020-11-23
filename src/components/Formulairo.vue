@@ -1,5 +1,5 @@
 <template>
-  <div class="card">
+  <div class="card shadow-sm p-3 mb-5 bg-white rounded">
     <div class="card-header bg-info text-white">
       <h2 id="msg">{{ msg }}</h2>
       <span class="float-right">1</span>

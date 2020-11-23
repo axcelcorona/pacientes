@@ -1,5 +1,5 @@
 <template>
-  <div class="card my-3">
+  <div class="card my-3  shadow-sm p-3 mb-5 bg-white rounded">
     <div class="card-header">
       <span>{{ paciente.numeroPaciente }}</span>
       <h2 id="nombre">{{ paciente.nombre }}</h2>
