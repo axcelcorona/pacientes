@@ -26,11 +26,11 @@ export default createStore({
       state.pacientes = state.pacientes.filter(item => item.id !== payload)
     },
     editarPaciente(state, payload) {
-      if(!state.pacientes.find(item => item.id === payload ? payload : item)){
+      if (!state.pacientes.find(item => item.id === payload ? payload : item)) {
         router.push('/')
         return
       }
-      state.paciente = state.pacientes.find(item => item.id === payload )
+      state.paciente = state.pacientes.find(item => item.id === payload)
     },
     updatePaciente(state, payload) {
       state.pacientes = state.pacientes.map(item => item.is === payload ? payload : item)
@@ -42,8 +42,8 @@ export default createStore({
     // Enviando los Datos a la base de datos FireBase
     async setPacientes({ commit }, paciente) {
       try {
-        const res = await fetch(`https://covid-19-pacientes.firebaseio.com/pacientes/${paciente.id}.json`,{
-          method:'PUT',
+        const res = await fetch(`https://covid-19-pacientes.firebaseio.com/pacientes/${paciente.id}.json`, {
+          method: 'PUT',
           body: JSON.stringify(paciente)
         })
         const datadb = await res.json()
@@ -61,17 +61,29 @@ export default createStore({
       commit('editarPaciente', id)
     },
 
-    setUpdatePaciente({commit}, paciente){
-      commit('updatePaciente', paciente)
+    // Editando un paciente en la base de datos
+    async setUpdatePaciente({ commit }, paciente) {
+      try {
+        const res = await fetch(`https://covid-19-pacientes.firebaseio.com/pacientes/${paciente.id}.json`, {
+          method: 'PATCH',
+          body: JSON.stringify(paciente)
+        })
+
+        const datadb = await res.json()
+
+        commit('updatePaciente', datadb)
+      } catch (error) {
+        console.log(error)
+      }
     },
 
     // cargando los datos de la base de datos al arrypacientes
-    async setCargarDatosPacientes({commit}){
+    async setCargarDatosPacientes({ commit }) {
       try {
         const res = await fetch('https://covid-19-pacientes.firebaseio.com/pacientes.json')
         const datadb = await res.json()
 
-        for(let item in datadb){
+        for (let item in datadb) {
           commit('addPacietne', datadb[item])
         }
       } catch (error) {
