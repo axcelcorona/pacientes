@@ -40,7 +40,18 @@ export default createStore({
     }
   },
   actions: {
-    setPacientes({ commit }, paciente) {
+    // Enviando los Datos a la base de datos FireBase
+    async setPacientes({ commit }, paciente) {
+      try {
+        const res = await fetch(`https://covid-19-pacientes.firebaseio.com/pacientes/${paciente.id}.json`,{
+          method:'PUT',
+          body: JSON.stringify(paciente)
+        })
+        const datadb = await res.json()
+        console.log(datadb)
+      } catch (error) {
+        console.log(error)
+      }
       commit('addPacietne', paciente)
     },
 
