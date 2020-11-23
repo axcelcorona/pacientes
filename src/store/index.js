@@ -21,7 +21,6 @@ export default createStore({
   mutations: {
     addPacietne(state, payload) {
       state.pacientes.push(payload)
-      console.log(state.pacientes)
     },
     deletePaciente(state, payload) {
       state.pacientes = state.pacientes.filter(item => item.id !== payload)
@@ -48,11 +47,10 @@ export default createStore({
           body: JSON.stringify(paciente)
         })
         const datadb = await res.json()
-        console.log(datadb)
+        commit('addPacietne', datadb)
       } catch (error) {
         console.log(error)
       }
-      commit('addPacietne', paciente)
     },
 
     setDeletePacietne({ commit }, id) {
@@ -65,6 +63,20 @@ export default createStore({
 
     setUpdatePaciente({commit}, paciente){
       commit('updatePaciente', paciente)
+    },
+
+    // cargando los datos de la base de datos al arrypacientes
+    async setCargarDatosPacientes({commit}){
+      try {
+        const res = await fetch('https://covid-19-pacientes.firebaseio.com/pacientes.json')
+        const datadb = await res.json()
+
+        for(let item in datadb){
+          commit('addPacietne', datadb[item])
+        }
+      } catch (error) {
+        console.log(error)
+      }
     }
   },
   modules: {

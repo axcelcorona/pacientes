@@ -35,7 +35,7 @@ export default {
     }
   },
   methods:{
-    ...mapActions(['setPacientes']),
+    ...mapActions(['setPacientes', 'setCargarDatosPacientes']),
     porcesarFormulario(){
       // generando el id 
       this.paciente.id = shortid.generate()
@@ -60,6 +60,9 @@ export default {
         sintomas:[]
       }
     }
+  },
+  created(){
+    this.setCargarDatosPacientes()
   }
 }
 </script>
