@@ -38,7 +38,7 @@
         </ul>
       </div>
     </div>
-    <div class="card-footer">
+    <div class="card-footer bg-white">
       <button class="btn btn-danger" @click="setDeletePacietne(paciente.id)">
         Eliminar
       </button>
